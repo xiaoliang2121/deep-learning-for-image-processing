@@ -13,10 +13,10 @@ class VOCDataSet(Dataset):
     def __init__(self, voc_root, year="2012", transforms=None, txt_name: str = "train.txt"):
         assert year in ["2007", "2012"], "year must be in ['2007', '2012']"
         # 增加容错能力
-        if "VOCdevkit" in voc_root:
+        if "pascal-voc-2012" in voc_root:
             self.root = os.path.join(voc_root, f"VOC{year}")
         else:
-            self.root = os.path.join(voc_root, "VOCdevkit", f"VOC{year}")
+            self.root = os.path.join(voc_root, "pascal-voc-2012", f"VOC{year}")
         self.img_root = os.path.join(self.root, "JPEGImages")
         self.annotations_root = os.path.join(self.root, "Annotations")
 

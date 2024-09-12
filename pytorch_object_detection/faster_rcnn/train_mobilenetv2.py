@@ -20,7 +20,7 @@ def create_model(num_classes):
     # backbone.out_channels = 512
 
     # https://download.pytorch.org/models/mobilenet_v2-b0353104.pth
-    backbone = MobileNetV2(weights_path="./backbone/mobilenet_v2.pth").features
+    backbone = MobileNetV2(weights_path="/kaggle/working/pretrain_weights/mobilenet_v2.pth").features
     backbone.out_channels = 1280  # 设置对应backbone输出特征矩阵的channels
 
     anchor_generator = AnchorsGenerator(sizes=((32, 64, 128, 256, 512),),
@@ -55,13 +55,13 @@ def main():
         "val": transforms.Compose([transforms.ToTensor()])
     }
 
-    VOC_root = "./"  # VOCdevkit
+    VOC_root = "/kaggle/input/"  # VOCdevkit
     aspect_ratio_group_factor = 3
     batch_size = 8
     amp = False  # 是否使用混合精度训练，需要GPU支持
 
     # check voc root
-    if os.path.exists(os.path.join(VOC_root, "VOCdevkit")) is False:
+    if os.path.exists(os.path.join(VOC_root, "pascal-voc-2012")) is False:
         raise FileNotFoundError("VOCdevkit dose not in path:'{}'.".format(VOC_root))
 
     # load train data set
