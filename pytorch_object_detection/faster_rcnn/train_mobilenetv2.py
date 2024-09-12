@@ -58,7 +58,7 @@ def main():
 
     VOC_root = "/mnt/i/DataSets/pascal_voc/"  # VOCdevkit
     aspect_ratio_group_factor = 3
-    batch_size = 1
+    batch_size = 2
     amp = False  # 是否使用混合精度训练，需要GPU支持
 
     # check voc root

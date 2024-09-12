@@ -49,7 +49,7 @@ class VOCDataSet(Dataset):
         assert len(self.xml_list) > 0, "in '{}' file does not find any information.".format(txt_path)
 
         # read class_indict
-        json_file = './pascal_voc_classes.json'
+        json_file = './pytorch_object_detection/faster_rcnn/pascal_voc_classes.json'
         assert os.path.exists(json_file), "{} file not exist.".format(json_file)
         with open(json_file, 'r') as f:
             self.class_dict = json.load(f)
