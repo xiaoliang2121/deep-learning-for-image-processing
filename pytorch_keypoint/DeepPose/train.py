@@ -30,6 +30,7 @@ def get_args_parser(add_help=True):
                         help='decrease lr every step-size epochs')
     parser.add_argument("--warmup_epoch", type=int, default=10, help="number of warmup epoch for training")
     parser.add_argument('--resume', default='', type=str, help='resume from checkpoint')
+    parser.add_argument('--test_only', action="store_true", help='Only test the model')
 
     return parser
 
@@ -125,6 +126,17 @@ def main(args):
         start_epoch = checkpoint['epoch'] + 1
         print("the training process from epoch{}...".format(start_epoch))
 
+    if args.test_only:
+        evaluate(model=model,
+                 epoch=start_epoch,
+                 val_loader=val_loader,
+                 device=device,
+                 tb_writer=tb_writer,
+                 affine_points_torch_func=transforms.affine_points_torch,
+                 num_keypoints=num_keypoints,
+                 img_hw=img_hw)
+        return
+
     for epoch in range(start_epoch, epochs):
         # train
         train_one_epoch(model=model,
@@ -134,7 +146,8 @@ def main(args):
                         optimizer=optimizer,
                         lr_scheduler=lr_scheduler,
                         tb_writer=tb_writer,
-                        num_keypoints=num_keypoints)
+                        num_keypoints=num_keypoints,
+                        img_hw=img_hw)
 
         # eval
         if epoch % eval_freq == 0 or epoch == args.epochs - 1:

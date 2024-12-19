@@ -10,7 +10,7 @@
 - torchvision0.15.2+cu118（建议大于等于此版本）
 
 ## 训练数据集准备
-该项目采用的训练数据是WFLWD数据集（人脸98点检测），官方链接：[https://wywu.github.io/projects/LAB/WFLW.html](https://wywu.github.io/projects/LAB/WFLW.html)
+该项目采用的训练数据是WFLW数据集（人脸98点检测），官方链接：[https://wywu.github.io/projects/LAB/WFLW.html](https://wywu.github.io/projects/LAB/WFLW.html)
 
 在官方网页下载数据集后解压并组织成如下目录形式：
 ```
@@ -42,16 +42,16 @@ python train.py
 ### 多卡训练
 使用`train_multi_GPU.py`脚本：
 ```
-torchrun --nproc_per_node=8 train.py
+torchrun --nproc_per_node=8 train_multi_GPU.py
 ```
 若要单独指定使用某些卡可在启动指令前加入`CUDA_VISIBLE_DEVICES`参数，例如：
 ```
-CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node=4 train.py
+CUDA_VISIBLE_DEVICES=4,5,6,7 torchrun --nproc_per_node=4 train_multi_GPU.py
 ```
 
 ## 训练好的权重下载地址
-若没有训练条件或者只想简单体验下，可使用本人训练好的模型权重（包含optimizer等信息故文件会略大），该权重在WFLW验证集上的NME指标为`3.427`，百度网盘下载地址：[https://pan.baidu.com/s/1froI_3dRe7vEJnecR9p7nw](https://pan.baidu.com/s/1froI_3dRe7vEJnecR9p7nw) 
-提取码：quxv
+若没有训练条件或者只想简单体验下，可使用本人训练好的模型权重（包含optimizer等信息故文件会略大），该权重在WFLW验证集上的NME指标为`0.048`，百度网盘下载地址：[https://pan.baidu.com/s/1L_zg-fmocEyzhSTxj8IDJw](https://pan.baidu.com/s/1L_zg-fmocEyzhSTxj8IDJw) 
+提取码：8fux
 
 下载完成后在当前项目下创建一个`weights`文件夹，并将权重放置该文件夹内。
 
