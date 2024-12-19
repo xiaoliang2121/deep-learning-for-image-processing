@@ -41,8 +41,8 @@ def create_model(num_classes, load_pretrain_weights=True):
 
 
 def main(args):
-    # device = torch.device(args.device if torch.cuda.is_available() else "cpu")
-    device = torch.device("cpu")
+    device = torch.device(args.device if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cpu")
     print("Using {} device training.".format(device.type))
 
     # 用来保存coco_info的文件
