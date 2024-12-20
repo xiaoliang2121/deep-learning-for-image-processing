@@ -10,7 +10,8 @@ from model import resnet34
 
 
 def main():
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device('cpu')
 
     data_transform = transforms.Compose(
         [transforms.Resize(256),
@@ -19,7 +20,11 @@ def main():
          transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])])
 
     # load image
-    img_path = "../tulip.jpg"
+    data_root = os.path.abspath(os.path.join(os.getcwd(), "../.."))  # get data root path
+    image_path = os.path.join(data_root, "data_set", "flower_data")  # flower data set path
+    assert os.path.exists(image_path), "{} path does not exist.".format(image_path)
+    
+    img_path = image_path + "/39271782_b4335d09ae_n.jpg"
     assert os.path.exists(img_path), "file: '{}' dose not exist.".format(img_path)
     img = Image.open(img_path)
     plt.imshow(img)
@@ -39,7 +44,7 @@ def main():
     model = resnet34(num_classes=5).to(device)
 
     # load model weights
-    weights_path = "./resNet34.pth"
+    weights_path = image_path + "/resNet34.pth"
     assert os.path.exists(weights_path), "file: '{}' dose not exist.".format(weights_path)
     model.load_state_dict(torch.load(weights_path, map_location=device))
 

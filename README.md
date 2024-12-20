@@ -8,6 +8,8 @@
 3）使用Tensorflow（内部的keras模块）进行网络的搭建与训练 
 * 课程中所有PPT都放在`course_ppt`文件夹下，需要的自行下载。
 
+[大佬博客](https://blog.csdn.net/qq_37541097?type=blog)
+
 
 ## 教程目录，点击跳转相应视频（后期会根据学习内容增加）
 

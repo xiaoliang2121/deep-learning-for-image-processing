@@ -8,11 +8,12 @@ import torch.optim as optim
 from torchvision import transforms, datasets
 from tqdm import tqdm
 
-from model import resnet34
+from model import resnet34, resnet50
 
 
 def main():
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device('cpu')
     print("using {} device.".format(device))
 
     data_transform = {
@@ -59,9 +60,11 @@ def main():
                                                                            val_num))
     
     net = resnet34()
+    # net = resnet50()
     # load pretrain weights
     # download url: https://download.pytorch.org/models/resnet34-333f7ec4.pth
-    model_weight_path = "./resnet34-pre.pth"
+    # model_weight_path = "./resnet34-pre.pth"
+    model_weight_path = image_path + "/resnet34-333f7ec4.pth"
     assert os.path.exists(model_weight_path), "file {} does not exist.".format(model_weight_path)
     net.load_state_dict(torch.load(model_weight_path, map_location='cpu'))
     # for param in net.parameters():
@@ -81,7 +84,8 @@ def main():
 
     epochs = 3
     best_acc = 0.0
-    save_path = './resNet34.pth'
+    # save_path = './resNet34.pth'
+    save_path = image_path + '/resNet34.pth'
     train_steps = len(train_loader)
     for epoch in range(epochs):
         # train
